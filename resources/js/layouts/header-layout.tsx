@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     LogIn,
     LogOut,
+    Menu,
     Package,
     Power,
     PowerOff,
@@ -11,19 +12,37 @@ import {
     User,
     UserPlus,
 } from 'lucide-react';
+import { useState } from 'react';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from '@/components/ui/sheet';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { home, login, logout, register } from '@/routes';
 import { edit as editProfile } from '@/routes/profile';
 
+const navItems = [
+    { href: '/', label: 'Home', isHome: true },
+    { href: '/', label: 'Our Story', isHome: false },
+    { href: '/', label: 'Bread & Specialties', isHome: false },
+    { href: '/', label: 'Contact', isHome: false },
+];
+
 export default function HeaderLayout() {
     const { auth } = usePage().props;
     const { isCurrentUrl } = useCurrentUrl();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const homeIsActive = isCurrentUrl(home());
 
     return (
         <header className="site-header">
@@ -33,17 +52,19 @@ export default function HeaderLayout() {
                 </Link>
 
                 <nav className="site-nav" aria-label="Primary">
-                    <Link
-                        href={home()}
-                        className={
-                            isCurrentUrl(home()) ? 'is-active' : undefined
-                        }
-                    >
-                        Home
-                    </Link>
-                    <Link href="/">Our Story</Link>
-                    <Link href="/">Bread & Specialties</Link>
-                    <Link href="/">Contact</Link>
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.label}
+                            href={item.isHome ? home() : item.href}
+                            className={
+                                item.isHome && homeIsActive
+                                    ? 'is-active'
+                                    : undefined
+                            }
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
                 </nav>
 
                 <div className="site-header-actions">
@@ -125,6 +146,42 @@ export default function HeaderLayout() {
                             )}
                         </DropdownMenuContent>
                     </DropdownMenu>
+
+                    <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                        <SheetTrigger
+                            className="site-header-icon site-nav-toggle"
+                            aria-label="Open menu"
+                        >
+                            <Menu />
+                        </SheetTrigger>
+                        <SheetContent side="right" className="site-drawer">
+                            <SheetHeader>
+                                <SheetTitle>Menu</SheetTitle>
+                                <SheetDescription className="sr-only">
+                                    Site navigation
+                                </SheetDescription>
+                            </SheetHeader>
+                            <nav
+                                className="site-drawer-nav"
+                                aria-label="Primary"
+                            >
+                                {navItems.map((item) => (
+                                    <Link
+                                        key={item.label}
+                                        href={item.isHome ? home() : item.href}
+                                        className={
+                                            item.isHome && homeIsActive
+                                                ? 'is-active'
+                                                : undefined
+                                        }
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </nav>
+                        </SheetContent>
+                    </Sheet>
                 </div>
             </div>
         </header>
