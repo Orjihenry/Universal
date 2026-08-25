@@ -48,9 +48,16 @@ export default function Welcome() {
                             Made fresh for every moment, shared with joy
                         </h1>
                         <p className="hero-text">
-                            We believe great taste and responsible choices should go hand in hand. We are committed to creating quality baked goods while making thoughtful choices that respect our communities and the world around us.
+                            We believe great taste and responsible choices
+                            should go hand in hand. We are committed to creating
+                            quality baked goods while making thoughtful choices
+                            that respect our communities and the world around
+                            us.
                             <br />
-                            Our goal is to make everyday choices more responsible—baking products that people can enjoy today while contributing to a better future for generations to come.
+                            Our goal is to make everyday choices more
+                            responsible—baking products that people can enjoy
+                            today while contributing to a better future for
+                            generations to come.
                         </p>
                         <Link
                             href={auth.user ? dashboardUrl : login()}
