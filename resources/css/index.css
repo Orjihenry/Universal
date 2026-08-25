@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'Rouge Script';
+    src: url('../fonts/Rouge_Script/RougeScript-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: min(80vh, 44rem);
+    background-image: url('../images/chef-33685474.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 55%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    width: min(38rem, 58%);
+    padding: 3rem clamp(1.5rem, 6vw, 4.5rem);
+    color: #fff;
+    text-align: left;
+}
+
+.hero-title {
+    margin: 0;
+    font-family: 'Rouge Script', cursive;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.2;
+}
+
+.hero-highlight {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+.hero-highlight::before {
+    content: '';
+    position: absolute;
+    inset: 0.05em -0.12em -0.02em;
+    z-index: -1;
+    background: rgb(147 197 253 / 55%);
+}
+
+.hero-heading {
+    margin: 0;
+    max-width: 18ch;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.15rem 0.7rem 0.7rem;
+    border-radius: 0.25rem;
+    background: #e11d2e;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.hero-cta:hover {
+    background: #c41022;
+}
+
+.hero-cta-icon {
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    border-radius: 9999px;
+    background: #fff;
+    color: #e11d2e;
+}
+
+.hero-cta-icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        width: 100%;
+        padding-block: 2.5rem;
+    }
+
+    .hero-heading {
+        max-width: none;
+    }
+}

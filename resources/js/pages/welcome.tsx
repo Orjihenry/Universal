@@ -8,10 +8,10 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="Welcome" />
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
-                <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
-                    <nav className="flex items-center justify-end gap-4">
+            <Head title="Global Universal Bread Industry" />
+            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] text-[#1b1b18] dark:bg-[#0a0a0a]">
+                <header className="w-full px-6 py-6 text-sm not-has-[nav]:hidden lg:px-8">
+                    <nav className="mx-auto flex max-w-[335px] items-center justify-end gap-4 lg:max-w-4xl">
                         {auth.user ? (
                             <Link
                                 href={dashboardUrl}
@@ -37,12 +37,50 @@ export default function Welcome() {
                         )}
                     </nav>
                 </header>
-                <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
+                <section className="hero">
+                    <div className="hero-content">
+                        <p className="hero-title">
+                            Every bite makes the{' '}
+                            <span className="hero-highlight">moment</span>{' '}
+                            special
+                        </p>
+                        <h1 className="hero-heading">
+                            Made fresh for every moment, shared with joy
+                        </h1>
+                        <p className="hero-text">
+                            We believe great taste and responsible choices should go hand in hand. We are committed to creating quality baked goods while making thoughtful choices that respect our communities and the world around us.
+                            <br />
+                            Our goal is to make everyday choices more responsible—baking products that people can enjoy today while contributing to a better future for generations to come.
+                        </p>
+                        <Link
+                            href={auth.user ? dashboardUrl : login()}
+                            className="hero-cta"
+                        >
+                            <span className="hero-cta-icon" aria-hidden="true">
+                                <svg
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M3 8h10M9 4l4 4-4 4"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </span>
+                            {auth.user ? 'Dashboard' : 'Log in'}
+                        </Link>
+                    </div>
+                </section>
+                <div className="flex w-full items-center justify-center p-6 opacity-100 transition-opacity duration-750 lg:grow lg:p-8 starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                         <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                            <h1 className="mb-1 font-medium">
+                            <h2 className="mb-1 font-medium">
                                 Let's get started
-                            </h1>
+                            </h2>
                             <p className="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
                                 Laravel has an incredibly rich ecosystem.
                                 <br />
