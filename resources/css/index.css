@@ -1,3 +1,4 @@
+/* Universal */
 @font-face {
     font-family: 'Rouge Script';
     src: url('../fonts/Rouge_Script/RougeScript-Regular.ttf') format('truetype');
@@ -5,6 +6,36 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('../fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.text-dancing-script {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-rouge {
+    margin: 0;
+    font-family: 'Rouge Script', cursive;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.2;
+}
+
+.hero-content,
+.craft-content,
+.footer-inner {
+    padding: 0 var(--page-gutter);
+}
+/*  End Universal */
 
 .logo {
     display: flex;
@@ -141,22 +172,6 @@
         display: grid;
     }
 }
-
-/* Universal */
-.text-rouge {
-    margin: 0;
-    font-family: 'Rouge Script', cursive;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.2;
-}
-
-.hero-content,
-.craft-content {
-    padding: 0 var(--page-gutter);
-}
-/*  End Universal */
 
 .hero {
     position: relative;
@@ -393,4 +408,22 @@
     .craft-flip-inner {
         transition: none;
     }
+}
+
+.legal {
+    color: #8aa39c;
+    letter-spacing: .02em;
+    border-top: 1px solid #f6f3ec1a;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 3rem 0 28px;
+    font-size: .86rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: normal;
+    align-items: center;
+    justify-content: space-between;
 }
