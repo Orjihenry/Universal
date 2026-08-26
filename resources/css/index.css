@@ -9,7 +9,8 @@
 
 @font-face {
     font-family: 'Dancing Script';
-    src: url('../fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf') format('truetype');
+    src: url('../fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf')
+        format('truetype');
     font-weight: 400 700;
     font-style: normal;
     font-display: swap;
@@ -158,21 +159,6 @@
     color: #ff6b7a;
 }
 
-@media (max-width: 64rem) {
-    .site-header-inner {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .site-nav {
-        display: none;
-    }
-
-    .site-nav-toggle {
-        display: grid;
-    }
-}
-
 .hero {
     position: relative;
     display: flex;
@@ -261,17 +247,6 @@
     height: 0.9rem;
 }
 
-@media (max-width: 768px) {
-    .hero-content {
-        width: 100%;
-        padding-block: 2.5rem;
-    }
-
-    .hero-heading {
-        max-width: none;
-    }
-}
-
 .craft {
     position: relative;
     width: 100%;
@@ -300,10 +275,18 @@
     text-align: center;
 }
 
+.craft-lede {
+    max-width: 36rem;
+    margin: 0;
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    line-height: 1.4;
+    text-wrap: balance;
+}
+
 .craft-secrets {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     width: 100%;
     max-width: 56rem;
     margin: 0;
@@ -314,6 +297,7 @@
 .craft-item {
     position: relative;
     display: flex;
+    min-width: 0;
     flex-direction: column;
     align-items: center;
 }
@@ -385,6 +369,7 @@
     margin: 0;
     font-size: 0.85rem;
     line-height: 1.4;
+    overflow-wrap: break-word;
 }
 
 .craft-label {
@@ -398,9 +383,90 @@
     border-radius: 0.75rem;
 }
 
-@media (max-width: 768px) {
+.legal {
+    color: #8aa39c;
+    letter-spacing: 0.02em;
+    border-top: 1px solid #f6f3ec1a;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 3rem 0 28px;
+    font-size: 0.86rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: normal;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 40rem) {
+    :root,
+    .dark {
+        --page-gutter: 1.5rem;
+    }
+
+    .craft-content {
+        gap: 1.5rem;
+        padding-block: 3rem 4rem;
+    }
+
+    .craft-flip {
+        height: 11.5rem;
+    }
+
+    .craft-icon {
+        width: 5.75rem;
+        height: 5.75rem;
+    }
+
+    .craft-icon svg {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+
+    .craft-face-back p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 40rem) {
     .craft-secrets {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        width: 100%;
+        padding-block: 2.5rem;
+    }
+
+    .hero-heading {
+        max-width: none;
+    }
+}
+
+@media (max-width: 64rem) {
+    .site-header-inner {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .site-nav {
+        display: none;
+    }
+
+    .site-nav-toggle {
+        display: grid;
+    }
+}
+
+@media (min-width: 64rem) {
+    .craft-secrets {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 
@@ -408,22 +474,4 @@
     .craft-flip-inner {
         transition: none;
     }
-}
-
-.legal {
-    color: #8aa39c;
-    letter-spacing: .02em;
-    border-top: 1px solid #f6f3ec1a;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding: 3rem 0 28px;
-    font-size: .86rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: normal;
-    align-items: center;
-    justify-content: space-between;
 }

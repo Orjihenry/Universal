@@ -168,7 +168,9 @@ export default function Welcome() {
                 <section className="craft">
                     <div className="craft-content">
                         <h2 className="text-rouge">Our Craft</h2>
-                        <p className="text-2xl">Specialists in the bakery industry since 1985</p>
+                        <p className="craft-lede">
+                            Specialists in the bakery industry since 1985
+                        </p>
                         <ul className="craft-secrets">
                             {craftSecrets.map((secret) => (
                                 <li key={secret.id} className="craft-item">
