@@ -72,6 +72,22 @@ export default function FooterLayout() {
                                 </li>
                             </ul>
                         )}
+                        <ul className="hours flex flex-col gap-4">
+                            <li>
+                                <p>Office Hours</p>
+                            </li>
+                            <li>
+                                <p>Monday - Friday</p>
+                                <p>8:00 AM - 5:00 PM</p>
+                            </li>
+                            <li>
+                                <p>Saturday</p>
+                                <p>10:00 AM - 3:00 PM</p>
+                            </li>
+                            <li>
+                                <p>Sunday - Closed</p>
+                            </li>
+                        </ul>
                     </section>
                     <section className="legal">
                         <span className="footer-legal">
