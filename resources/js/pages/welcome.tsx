@@ -1,6 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import HeaderLayout from '@/layouts/header-layout';
+import FooterLayout from '@/layouts/footer-layout';
 import { dashboard, login } from '@/routes';
 
 const craftSecrets: {
@@ -117,8 +118,8 @@ export default function Welcome() {
     return (
         <>
             <Head title="Global Universal Bread Industry" />
+            <HeaderLayout />
             <div className="flex min-h-screen flex-col items-center">
-                <HeaderLayout />
                 <section className="hero">
                     <div className="hero-content">
                         <p className="text-rouge">
@@ -203,6 +204,7 @@ export default function Welcome() {
                     </div>
                 </section>
             </div>
+                <FooterLayout />
         </>
     );
 }
