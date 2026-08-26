@@ -1,4 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
+import { edit as editProfile } from '@/routes/profile';
 
 const navItems = [
     { href: '/', label: 'Home', isHome: true },
@@ -8,25 +9,69 @@ const navItems = [
 ];
 
 export default function FooterLayout() {
+    const { auth } = usePage().props;
+
     return (
         <>
             <footer className="footer py-12">
                 <div className="footer-inner">
-                    <section className="footer-grid grid-cols-3 grid-rows-3 gap-4">
+                    <section className="footer-grid grid-cols-3 grid-rows-3 gap-4 mb-8">
                         <div className="footer-brand col-span-1 row-span-1">
                             <Link className="text-dancing-script footer-logo text-2xl font-bold" href="/">
-                                Global Universal Bakery Industries.
+                                Global Universal
+                                <br />
+                                Bakery Industries.
                             </Link>
                         </div>
                     </section>
-                    <section className="footer-grid grid-cols-3 grid-rows-3 gap-4">
-                        <div className="footer-nav col-span-1 row-span-1">
+                    <section className="footer-flex flex flex-col md:flex-row flex-wrap justify-between gap-4 mb-8">
+                        <span className="addresses">
+                            <span className="addresses-primary">
+                                <p>123 Main St, Anytown, USA</p>
+                                <p>info@globaluniversalbakery.com</p>
+                                <p>(123) 456-7890</p>
+                            </span>
+                            <hr className="border-gray-200 my-4" />
+                            <span className="addresses-secondary">
+                                <p>123 Main St, Anytown, USA</p>
+                                <p>info@globaluniversalbakery.com</p>
+                                <p>(123) 456-7890</p>
+                            </span>
+                        </span>
+                        <ul className="footer-nav flex flex-col gap-4">
                             {navItems.map((item) => (
-                                <Link key={item.label} href={item.href} className="footer-link">
-                                    {item.label}
-                                </Link>
+                                <li key={item.label}>
+                                    <Link href={item.href} className="footer-link">
+                                        {item.label}
+                                    </Link>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
+                        {auth.user ? (
+                            <ul className="footer-auth flex flex-col gap-4">
+                                <li>
+                                    <Link href="/">Shop</Link>
+                                </li>
+                                <li>
+                                    <Link href="/">Featured</Link>
+                                </li>
+                                <li>
+                                    <Link href={editProfile()}>Account</Link>
+                                </li>
+                                <li>
+                                    <Link href="/orders">My Orders</Link>
+                                </li>
+                            </ul>
+                        ) : (
+                            <ul className="footer-auth flex flex-col gap-4">
+                                <li>
+                                    <Link href="/">Shop</Link>
+                                </li>
+                                <li>
+                                    <Link href="/">Featured</Link>
+                                </li>
+                            </ul>
+                        )}
                     </section>
                     <section className="legal">
                         <span className="footer-legal">
