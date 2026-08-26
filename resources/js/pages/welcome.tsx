@@ -204,7 +204,7 @@ export default function Welcome() {
                     </div>
                 </section>
             </div>
-                <FooterLayout />
+            <FooterLayout />
         </>
     );
 }
