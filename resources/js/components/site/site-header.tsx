@@ -32,17 +32,19 @@ import { breadAndSpecialties, contact, home, login, logout, ourStory, register }
 import { edit as editProfile } from '@/routes/profile';
 
 const navItems = [
-    { href: '/', label: 'Home', isHome: true },
-    { href: ourStory(), label: 'Our Story', isHome: false, exact: true },
-    { href: breadAndSpecialties(), label: 'Bread & Specialties', isHome: false },
-    { href: contact(), label: 'Contact', isHome: false },
+    { href: home(), label: 'Home' },
+    { href: ourStory(), label: 'Our Story' },
+    { href: breadAndSpecialties(), label: 'Bread & Specialties' },
+    { href: contact(), label: 'Contact' },
 ];
 
 export default function SiteHeader() {
     const { auth } = usePage().props;
     const { isCurrentUrl } = useCurrentUrl();
     const [menuOpen, setMenuOpen] = useState(false);
-    const homeIsActive = isCurrentUrl(home());
+
+    const navLinkClassName = (href: (typeof navItems)[number]['href']) =>
+        isCurrentUrl(href) ? 'is-active' : undefined;
 
     return (
         <header className="site-header">
@@ -55,11 +57,10 @@ export default function SiteHeader() {
                     {navItems.map((item) => (
                         <Link
                             key={item.label}
-                            href={item.isHome ? home() : item.href}
-                            className={
-                                item.isHome && homeIsActive
-                                    ? 'is-active'
-                                    : undefined
+                            href={item.href}
+                            className={navLinkClassName(item.href)}
+                            aria-current={
+                                isCurrentUrl(item.href) ? 'page' : undefined
                             }
                         >
                             {item.label}
@@ -168,10 +169,11 @@ export default function SiteHeader() {
                                 {navItems.map((item) => (
                                     <Link
                                         key={item.label}
-                                        href={item.isHome ? home() : item.href}
-                                        className={
-                                            item.isHome && homeIsActive
-                                                ? 'is-active'
+                                        href={item.href}
+                                        className={navLinkClassName(item.href)}
+                                        aria-current={
+                                            isCurrentUrl(item.href)
+                                                ? 'page'
                                                 : undefined
                                         }
                                         onClick={() => setMenuOpen(false)}
