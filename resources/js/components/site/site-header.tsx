@@ -28,17 +28,17 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { useCurrentUrl } from '@/hooks/use-current-url';
-import { home, login, logout, ourStory, register } from '@/routes';
+import { breadAndSpecialties, contact, home, login, logout, ourStory, register } from '@/routes';
 import { edit as editProfile } from '@/routes/profile';
 
 const navItems = [
     { href: '/', label: 'Home', isHome: true },
     { href: ourStory(), label: 'Our Story', isHome: false, exact: true },
-    { href: '/', label: 'Bread & Specialties', isHome: false },
-    { href: '/', label: 'Contact', isHome: false },
+    { href: breadAndSpecialties(), label: 'Bread & Specialties', isHome: false },
+    { href: contact(), label: 'Contact', isHome: false },
 ];
 
-export default function HeaderLayout() {
+export default function SiteHeader() {
     const { auth } = usePage().props;
     const { isCurrentUrl } = useCurrentUrl();
     const [menuOpen, setMenuOpen] = useState(false);

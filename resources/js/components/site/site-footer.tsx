@@ -9,7 +9,7 @@ const navItems = [
     { href: '/', label: 'Contact', isHome: false },
 ];
 
-export default function FooterLayout() {
+export default function SiteFooter() {
     const { auth } = usePage().props;
 
     return (
