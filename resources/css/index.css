@@ -33,7 +33,8 @@
 
 .hero-content,
 .craft-content,
-.footer-inner {
+.footer-inner,
+.our-story-content {
     padding: 0 var(--page-gutter);
 }
 /*  End Universal */
