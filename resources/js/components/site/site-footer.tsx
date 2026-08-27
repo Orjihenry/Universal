@@ -1,12 +1,12 @@
 import { Link, usePage } from "@inertiajs/react";
 import { edit as editProfile } from '@/routes/profile';
-import { ourStory } from "@/routes";
+import { breadAndSpecialties, contact, cookiePolicy, featured, home, ourStory, privacyPolicy, shop, termsOfService } from "@/routes";
 
 const navItems = [
-    { href: '/', label: 'Home', isHome: true },
+    { href: home(), label: 'Home', isHome: true },
     { href: ourStory(), label: 'Our Story', isHome: false },
-    { href: '/', label: 'Bread & Specialties', isHome: false },
-    { href: '/', label: 'Contact', isHome: false },
+    { href: breadAndSpecialties(), label: 'Bread & Specialties', isHome: false },
+    { href: contact(), label: 'Contact', isHome: false },
 ];
 
 export default function SiteFooter() {
@@ -18,7 +18,7 @@ export default function SiteFooter() {
                 <div className="footer-inner">
                     <section className="footer-grid grid-cols-3 grid-rows-3 gap-4 mb-8">
                         <div className="footer-brand col-span-1 row-span-1">
-                            <Link className="text-dancing-script footer-logo text-2xl font-bold" href="/">
+                            <Link className="text-dancing-script footer-logo text-2xl font-bold" href={home()}>
                                 Global Universal
                                 <br />
                                 Bakery Industries.
@@ -51,10 +51,10 @@ export default function SiteFooter() {
                         {auth.user ? (
                             <ul className="footer-auth flex flex-col gap-4">
                                 <li>
-                                    <Link href="/">Shop</Link>
+                                    <Link href={shop()}>Shop</Link>
                                 </li>
                                 <li>
-                                    <Link href="/">Featured</Link>
+                                    <Link href={featured()}>Featured</Link>
                                 </li>
                                 <li>
                                     <Link href={editProfile()}>Account</Link>
@@ -66,10 +66,10 @@ export default function SiteFooter() {
                         ) : (
                             <ul className="footer-auth flex flex-col gap-4">
                                 <li>
-                                    <Link href="/">Shop</Link>
+                                    <Link href={shop()}>Shop</Link>
                                 </li>
                                 <li>
-                                    <Link href="/">Featured</Link>
+                                    <Link href={featured()}>Featured</Link>
                                 </li>
                             </ul>
                         )}
@@ -95,9 +95,9 @@ export default function SiteFooter() {
                             <p>&copy; {new Date().getFullYear()} Global Universal Bakery Industries. All rights reserved.</p>
                         </span>
                         <span className="footer-legal-links flex flex-row gap-4">
-                            <Link href="/privacy-policy">Privacy Policy</Link>
-                            <Link href="/terms-of-service">Terms of Service</Link>
-                            <Link href="/cookie-policy">Cookie Policy</Link>
+                            <Link href={privacyPolicy()}>Privacy Policy</Link>
+                            <Link href={termsOfService()}>Terms of Service</Link>
+                            <Link href={cookiePolicy()}>Cookie Policy</Link>
                         </span>
                     </section>
                 </div>
