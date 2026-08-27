@@ -28,12 +28,12 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { useCurrentUrl } from '@/hooks/use-current-url';
-import { home, login, logout, register } from '@/routes';
+import { home, login, logout, ourStory, register } from '@/routes';
 import { edit as editProfile } from '@/routes/profile';
 
 const navItems = [
     { href: '/', label: 'Home', isHome: true },
-    { href: '/', label: 'Our Story', isHome: false },
+    { href: ourStory(), label: 'Our Story', isHome: false, exact: true },
     { href: '/', label: 'Bread & Specialties', isHome: false },
     { href: '/', label: 'Contact', isHome: false },
 ];

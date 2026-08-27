@@ -1,9 +1,10 @@
 import { Link, usePage } from "@inertiajs/react";
 import { edit as editProfile } from '@/routes/profile';
+import { ourStory } from "@/routes";
 
 const navItems = [
     { href: '/', label: 'Home', isHome: true },
-    { href: '/', label: 'Our Story', isHome: false },
+    { href: ourStory(), label: 'Our Story', isHome: false },
     { href: '/', label: 'Bread & Specialties', isHome: false },
     { href: '/', label: 'Contact', isHome: false },
 ];
