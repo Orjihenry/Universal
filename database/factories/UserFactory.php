@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\TeamRole;
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -40,20 +38,32 @@ class UserFactory extends Factory
     }
 
     /**
-     * Configure the model factory.
+     * Indicate that the model should have the user role.
      */
-    public function configure(): static
+    public function user(): static
     {
-        return $this->afterCreating(function ($user) {
-            $team = Team::factory()->personal()->create([
-                'name' => $user->name."'s Team",
-            ]);
+        return $this->afterCreating(function (User $user): void {
+            $user->assignRole('user');
+        });
+    }
 
-            $team->members()->attach($user, [
-                'role' => TeamRole::Owner->value,
-            ]);
+    /**
+     * Indicate that the model should have the staff role.
+     */
+    public function staff(): static
+    {
+        return $this->afterCreating(function (User $user): void {
+            $user->assignRole('staff');
+        });
+    }
 
-            $user->switchTeam($team);
+    /**
+     * Indicate that the model should have the admin role.
+     */
+    public function admin(): static
+    {
+        return $this->afterCreating(function (User $user): void {
+            $user->assignRole('admin');
         });
     }
 
