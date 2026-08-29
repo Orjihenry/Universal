@@ -67,7 +67,8 @@ export default function Register({ passwordRules }: Props) {
                                     tabIndex={3}
                                     autoComplete="tel"
                                     name="phone"
-                                    placeholder="+1 555 555 0100"
+                                    placeholder="+234 123 456 7890"
+                                    pattern="^(?:\+234|0)[789][01]\d{8}$"
                                 />
                                 <InputError message={errors.phone} />
                             </div>
