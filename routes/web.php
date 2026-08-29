@@ -19,8 +19,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 });
 
-Route::middleware(['admin'])->group(function () {
-    // Route::get('admin/dashboard', AdminDashboardController::class)->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
+    Route::get('admin/dashboard', AdminDashboardController::class)
+        ->name('admin-dashboard');
 });
 
 require __DIR__.'/settings.php';
