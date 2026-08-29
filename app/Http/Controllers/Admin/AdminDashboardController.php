@@ -10,6 +10,13 @@ class AdminDashboardController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('admin/admin-dashboard');
+        return Inertia::render('admin/dashboard', [
+            'breadcrumbs' => [
+                [
+                    'title' => 'Admin Dashboard',
+                    'href' => route('admin-dashboard'),
+                ],
+            ],
+        ]);
     }
 }
