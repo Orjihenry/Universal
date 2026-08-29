@@ -1,10 +1,16 @@
-import AdminHeader from "@/components/admin/admin-header";
+import AdminSidebarLayout from '@/components/admin/admin-sidebar-layout';
+import type { BreadcrumbItem } from '@/types';
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+    breadcrumbs = [],
+    children,
+}: {
+    breadcrumbs?: BreadcrumbItem[];
+    children: React.ReactNode;
+}) {
     return (
-        <>
-            <AdminHeader />
+        <AdminSidebarLayout breadcrumbs={breadcrumbs}>
             {children}
-        </>
+        </AdminSidebarLayout>
     );
 }
