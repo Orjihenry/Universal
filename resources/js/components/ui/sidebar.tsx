@@ -1,7 +1,7 @@
 import { Slot } from "@radix-ui/react-slot"
 import type { VariantProps} from "class-variance-authority";
 import { cva } from "class-variance-authority"
-import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react"
+import { PanelLeftCloseIcon, PanelLeftOpenIcon, XIcon } from "lucide-react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -268,6 +268,36 @@ function SidebarTrigger({
     >
       {isMobile || state === "collapsed" ? <PanelLeftOpenIcon /> : <PanelLeftCloseIcon />}
       <span className="sr-only">Toggle sidebar</span>
+    </Button>
+  )
+}
+
+function SidebarClose({
+  className,
+  onClick,
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const { isMobile, setOpenMobile } = useSidebar()
+
+  if (!isMobile) {
+    return null
+  }
+
+  return (
+    <Button
+      data-sidebar="close"
+      data-slot="sidebar-close"
+      variant="ghost"
+      size="icon"
+      className={cn("h-8 w-8", className)}
+      onClick={(event) => {
+        onClick?.(event)
+        setOpenMobile(false)
+      }}
+      {...props}
+    >
+      <XIcon className="size-4" />
+      <span className="sr-only">Close menu</span>
     </Button>
   )
 }
@@ -693,6 +723,7 @@ function SidebarMenuSubButton({
 
 export {
   Sidebar,
+  SidebarClose,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,

@@ -4,6 +4,7 @@ import {
     LogOut,
     Menu,
     Package,
+    X,
     Power,
     PowerOff,
     Search,
@@ -21,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetDescription,
     SheetHeader,
@@ -155,12 +157,23 @@ export default function SiteHeader() {
                         >
                             <Menu />
                         </SheetTrigger>
-                        <SheetContent side="right" className="site-drawer">
-                            <SheetHeader>
-                                <SheetTitle>Menu</SheetTitle>
-                                <SheetDescription className="sr-only">
-                                    Site navigation
-                                </SheetDescription>
+                        <SheetContent
+                            side="right"
+                            className="site-drawer [&>button]:hidden"
+                        >
+                            <SheetHeader className="flex flex-row items-center justify-between space-y-0">
+                                <div>
+                                    <SheetTitle>Menu</SheetTitle>
+                                    <SheetDescription className="sr-only">
+                                        Site navigation
+                                    </SheetDescription>
+                                </div>
+                                <SheetClose
+                                    className="site-header-icon"
+                                    aria-label="Close menu"
+                                >
+                                    <X />
+                                </SheetClose>
                             </SheetHeader>
                             <nav
                                 className="site-drawer-nav"
