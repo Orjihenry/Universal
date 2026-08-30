@@ -19,7 +19,7 @@ import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { NavItem } from '@/types';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
-    const { isCurrentUrl } = useCurrentUrl();
+    const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarGroupLabel>Admin Panel</SidebarGroupLabel>
@@ -32,8 +32,8 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                                 asChild
                                 defaultOpen={item.items.some((subItem) =>
                                     subItem.href
-                                        ? isCurrentUrl(subItem.href)
-                                        : false
+                                        ? isCurrentOrParentUrl(subItem.href)
+                                        : false,
                                 )}
                                 className="group/collapsible"
                             >

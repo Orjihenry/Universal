@@ -1,5 +1,6 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, Building, Building2, FolderGit2, LayoutGrid, Package2, Shield, User, UserCog, UserIcon, Users, Users2Icon, UsersIcon } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen, Building2, Cake, CakeSlice, FileText, FolderGit2, LayoutGrid, Mail, Package2, UserCog, UserIcon, Users } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,11 +14,17 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { adminDashboard } from '@/routes';
+import { adminDashboard, adminProducts } from '@/routes';
 import type { NavItem } from '@/types';
+
+const categoryIcons: Record<string, LucideIcon> = {
+    'bread-and-specialties': CakeSlice,
+    pastry: Cake,
+};
 
 export function AdminSidebar() {
     const dashboardUrl = adminDashboard();
+    const { productCategories = [] } = usePage().props;
 
     const mainNavItems: NavItem[] = [
         {
@@ -48,8 +55,21 @@ export function AdminSidebar() {
         },
         {
             title: 'Products',
-            href: '#',
-            icon: Shield,
+            icon: Package2,
+            items: [
+                {
+                    title: 'All products',
+                    href: adminProducts(),
+                    icon: Package2,
+                },
+                ...productCategories.map((category) => ({
+                    title: category.name,
+                    href: adminProducts({
+                        query: { category: category.slug },
+                    }),
+                    icon: categoryIcons[category.slug] ?? Package2,
+                })),
+            ],
         },
         {
             title: 'Businesses',
@@ -57,20 +77,27 @@ export function AdminSidebar() {
             icon: Building2,
         },
         {
-            title: 'Staff',
-            href: '#',
-            icon: Users2Icon,
-        },
-        {
-            title: 'Customers',
-            href: '#',
-            icon: UsersIcon,
-        },
-        {
-            title: 'Pending Orders',
+            title: 'Orders',
             href: '#',
             icon: Package2,
         },
+        {
+            title: 'Pages',
+            href: '#',
+            icon: FileText,
+            items: [
+                {
+                    title: 'About',
+                    href: '#',
+                    icon: BookOpen,
+                },
+                {
+                    title: 'Contact',
+                    href: '#',
+                    icon: Mail,
+                },
+            ],
+        }
     ];
 
     const footerNavItems: NavItem[] = [
