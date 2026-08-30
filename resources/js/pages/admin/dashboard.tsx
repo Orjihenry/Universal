@@ -1,26 +1,113 @@
 import { Head } from '@inertiajs/react';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import {
+    Clock,
+    DollarSign,
+    Package2,
+    PackageCheck,
+    ShoppingBag,
+    Users,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import Heading from '@/components/heading';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { adminDashboard } from '@/routes';
 
-export default function AdminDashboard() {
+type DashboardStats = {
+    todaysOrders: number;
+    todaysRevenue: string;
+    pendingOrders: number;
+    ordersReadyForPickup: number;
+    totalCustomers: number;
+    productsAvailable: number;
+};
+
+type StatCard = {
+    title: string;
+    value: string | number;
+    icon: LucideIcon;
+};
+
+type Props = {
+    stats: DashboardStats;
+};
+
+export default function AdminDashboard({ stats }: Props) {
+    const cards: StatCard[] = [
+        {
+            title: 'Today’s orders',
+            value: stats.todaysOrders,
+            icon: ShoppingBag,
+        },
+        {
+            title: 'Today’s revenue',
+            value: `$${stats.todaysRevenue}`,
+            icon: DollarSign,
+        },
+        {
+            title: 'Pending orders',
+            value: stats.pendingOrders,
+            icon: Clock,
+        },
+        {
+            title: 'Orders ready for pickup',
+            value: stats.ordersReadyForPickup,
+            icon: PackageCheck,
+        },
+        {
+            title: 'Total customers',
+            value: stats.totalCustomers,
+            icon: Users,
+        },
+        {
+            title: 'Products available',
+            value: stats.productsAvailable,
+            icon: Package2,
+        },
+    ];
+
     return (
         <>
             <Head title="Admin Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                </div>
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                </div>
+            <div className="flex h-full flex-1 flex-col gap-6 overflow-x-auto p-4 md:p-6">
+                <Heading
+                    title="Dashboard"
+                    description="A snapshot of orders, customers, and the catalog."
+                />
+
+                <section
+                    aria-label="Overview"
+                    className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+                >
+                    {cards.map((card) => (
+                        <Card key={card.title}>
+                            <CardHeader className="flex flex-row items-center justify-between gap-3">
+                                <CardDescription>{card.title}</CardDescription>
+                                <card.icon className="size-4 text-muted-foreground" />
+                            </CardHeader>
+                            <CardContent>
+                                <CardTitle className="text-2xl font-semibold tabular-nums">
+                                    {card.value}
+                                </CardTitle>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </section>
             </div>
         </>
     );
 }
+
+AdminDashboard.layout = {
+    breadcrumbs: [
+        {
+            title: 'Dashboard',
+            href: adminDashboard(),
+        },
+    ],
+};

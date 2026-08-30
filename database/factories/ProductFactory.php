@@ -58,4 +58,11 @@ class ProductFactory extends Factory
             'featured' => true,
         ]);
     }
+
+    public function unavailable(): static
+    {
+        return $this->state(fn (): array => [
+            'is_available' => false,
+        ]);
+    }
 }

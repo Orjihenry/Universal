@@ -67,6 +67,16 @@ class Product extends Model
     }
 
     /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function available(Builder $query): Builder
+    {
+        return $query->where('is_available', true);
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
