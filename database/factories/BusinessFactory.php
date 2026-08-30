@@ -25,7 +25,7 @@ class BusinessFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'email' => fake()->unique()->companyEmail(),
             'website' => fake()->optional()->url(),
-            'business_type' => fake()->randomElement(['retail', 'wholesale', 'service', 'manufacturing']),
+            'business_type' => fake()->randomElement(Business::TYPES),
             'city' => fake()->city(),
             'state' => fake()->stateAbbr(),
             'status' => BusinessStatus::Pending,
@@ -38,10 +38,17 @@ class BusinessFactory extends Factory
      */
     public function approved(?User $approver = null): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (): array => [
             'status' => BusinessStatus::Approved,
             'approved_by' => $approver ?? User::factory(),
             'approved_at' => now(),
+        ]);
+    }
+
+    public function suspended(): static
+    {
+        return $this->state(fn (): array => [
+            'status' => BusinessStatus::Suspended,
         ]);
     }
 }

@@ -15,7 +15,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { adminDashboard, adminProducts } from '@/routes';
+import { adminBusinesses, adminDashboard, adminProducts } from '@/routes';
 import type { NavItem } from '@/types';
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -74,7 +74,7 @@ export function AdminSidebar() {
         },
         {
             title: 'Businesses',
-            href: '#',
+            href: adminBusinesses(),
             icon: Building2,
         },
         {

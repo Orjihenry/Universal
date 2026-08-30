@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,14 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
         ->name('admin-products.create');
     Route::post('admin/products', [ProductController::class, 'store'])
         ->name('admin-products.store');
+    Route::get('admin/businesses', [BusinessController::class, 'index'])
+        ->name('admin-businesses');
+    Route::get('admin/businesses/create', [BusinessController::class, 'create'])
+        ->name('admin-businesses.create');
+    Route::post('admin/businesses', [BusinessController::class, 'store'])
+        ->name('admin-businesses.store');
+    Route::get('admin/businesses/{business}', [BusinessController::class, 'show'])
+        ->name('admin-businesses.show');
 });
 
 require __DIR__.'/settings.php';

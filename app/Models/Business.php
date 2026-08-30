@@ -42,6 +42,11 @@ class Business extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * @var list<string>
+     */
+    public const TYPES = ['retail', 'wholesale', 'service', 'manufacturing'];
+
+    /**
      * @var array<string, mixed>
      */
     protected $attributes = [
@@ -85,7 +90,47 @@ class Business extends Model
     #[Scope]
     protected function awaitingApproval(Builder $query): Builder
     {
+        return $query->pending();
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function pending(Builder $query): Builder
+    {
         return $query->where('status', BusinessStatus::Pending);
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function approved(Builder $query): Builder
+    {
+        return $query->where('status', BusinessStatus::Approved);
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function suspended(Builder $query): Builder
+    {
+        return $query->where('status', BusinessStatus::Suspended);
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function active(Builder $query): Builder
+    {
+        return $query->approved();
     }
 
     /**
