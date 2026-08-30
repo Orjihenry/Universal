@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, Building, Building2, FolderGit2, LayoutGrid, Package2, Shield, Users, Users2Icon, UsersIcon } from 'lucide-react';
+import { BookOpen, Building, Building2, FolderGit2, LayoutGrid, Package2, Shield, User, UserCog, UserIcon, Users, Users2Icon, UsersIcon } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -27,32 +27,48 @@ export function AdminSidebar() {
         },
         {
             title: 'Users',
-            href: 'usersUrl',
             icon: Users,
+            items: [
+                {
+                    title: 'Customers',
+                    href: '#',
+                    icon: Users,
+                },
+                {
+                    title: 'Staff',
+                    href: '#',
+                    icon: UserIcon,
+                },
+                {
+                    title: 'Admins',
+                    href: '#',
+                    icon: UserCog,
+                },
+            ],
         },
         {
             title: 'Products',
-            href: 'rolesUrl',
+            href: '#',
             icon: Shield,
         },
         {
             title: 'Businesses',
-            href: 'businessesUrl',
+            href: '#',
             icon: Building2,
         },
         {
             title: 'Staff',
-            href: 'staffUrl',
+            href: '#',
             icon: Users2Icon,
         },
         {
             title: 'Customers',
-            href: 'customersUrl',
+            href: '#',
             icon: UsersIcon,
         },
         {
             title: 'Pending Orders',
-            href: 'ordersUrl',
+            href: '#',
             icon: Package2,
         },
     ];
