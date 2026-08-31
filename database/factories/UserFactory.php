@@ -68,6 +68,16 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model should have the super admin role.
+     */
+    public function superAdmin(): static
+    {
+        return $this->afterCreating(function (User $user): void {
+            $user->assignRole('super_admin');
+        });
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

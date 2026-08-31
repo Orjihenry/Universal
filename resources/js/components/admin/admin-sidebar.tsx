@@ -15,7 +15,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { adminBusinesses, adminDashboard, adminOrders, adminProducts } from '@/routes';
+import { adminBusinesses, adminDashboard, adminOrders, adminProducts, adminUsers } from '@/routes';
 import type { NavItem } from '@/types';
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -39,17 +39,17 @@ export function AdminSidebar() {
             items: [
                 {
                     title: 'Customers',
-                    href: '#',
+                    href: adminUsers('customers'),
                     icon: Users,
                 },
                 {
                     title: 'Staff',
-                    href: '#',
+                    href: adminUsers('staff'),
                     icon: UserIcon,
                 },
                 {
                     title: 'Admins',
-                    href: '#',
+                    href: adminUsers('admins'),
                     icon: UserCog,
                 },
             ],

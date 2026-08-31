@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,12 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
         ->name('admin-orders');
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])
         ->name('admin-orders.show');
+    Route::get('admin/users/{audience}', [UserController::class, 'index'])
+        ->whereIn('audience', ['customers', 'staff', 'admins'])
+        ->name('admin-users');
+    Route::get('admin/users/{audience}/{user}', [UserController::class, 'show'])
+        ->whereIn('audience', ['customers', 'staff', 'admins'])
+        ->name('admin-users.show');
 });
 
 require __DIR__.'/settings.php';

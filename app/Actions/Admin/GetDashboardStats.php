@@ -31,7 +31,7 @@ class GetDashboardStats
             'todaysRevenue' => number_format((float) Order::query()->placedToday()->billable()->sum('total'), 2, '.', ''),
             'pendingOrders' => Order::query()->pending()->count(),
             'ordersReadyForPickup' => Order::query()->readyForPickup()->count(),
-            'totalCustomers' => User::query()->role('user')->count(),
+            'totalCustomers' => User::query()->customers()->count(),
             'productsAvailable' => Product::query()->available()->count(),
             'salesPeriod' => $period->value,
             'salesPeriodLabel' => $period->label(),
