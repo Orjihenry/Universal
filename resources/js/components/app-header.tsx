@@ -43,14 +43,14 @@ type Props = {
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'Help and Support',
-        href: help(),
-        icon: LifeBuoy,
-    },
-    {
         title: 'FAQs',
         href: faqs(),
         icon: BookOpen,
+    },
+    {
+        title: 'Help and Support',
+        href: help(),
+        icon: LifeBuoy,
     },
 ];
 

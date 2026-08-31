@@ -21,6 +21,11 @@ export function AppSidebar() {
 
     const mainNavItems: NavItem[] = [
         {
+            title: 'Back to site',
+            href: home(),
+            icon: House,
+        },
+        {
             title: 'Dashboard',
             href: dashboardUrl,
             icon: LayoutGrid,
@@ -30,23 +35,18 @@ export function AppSidebar() {
             href: orders(),
             icon: Package2,
         },
-        {
-            title: 'Back to site',
-            href: home(),
-            icon: House,
-        },
     ];
 
     const footerNavItems: NavItem[] = [
         {
-            title: 'Help and Support',
-            href: help(),
-            icon: LifeBuoy,
-        },
-        {
             title: 'FAQs',
             href: faqs(),
             icon: BookOpen,
+        },
+        {
+            title: 'Help and Support',
+            href: help(),
+            icon: LifeBuoy,
         },
     ];
 
