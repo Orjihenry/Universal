@@ -14,6 +14,7 @@ import {
     UserPlus,
 } from 'lucide-react';
 import { useState } from 'react';
+import AppearanceToggle from '@/components/appearance-toggle';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -39,6 +40,9 @@ const navItems = [
     { href: breadAndSpecialties(), label: 'Bread & Specialties' },
     { href: contact(), label: 'Contact' },
 ];
+
+const appearanceToggleClassName =
+    'site-header-icon rounded-full bg-transparent hover:bg-transparent';
 
 export default function SiteHeader() {
     const { auth } = usePage().props;
@@ -112,6 +116,8 @@ export default function SiteHeader() {
                         </DropdownMenu>
                     )}
 
+                    <AppearanceToggle className={appearanceToggleClassName} />
+
                     <DropdownMenu>
                         <DropdownMenuTrigger
                             className="site-header-icon"
@@ -168,12 +174,15 @@ export default function SiteHeader() {
                                         Site navigation
                                     </SheetDescription>
                                 </div>
-                                <SheetClose
-                                    className="site-header-icon"
-                                    aria-label="Close menu"
-                                >
-                                    <X />
-                                </SheetClose>
+                                <div className="flex items-center gap-1">
+                                    <AppearanceToggle className={appearanceToggleClassName} />
+                                    <SheetClose
+                                        className="site-header-icon"
+                                        aria-label="Close menu"
+                                    >
+                                        <X />
+                                    </SheetClose>
+                                </div>
                             </SheetHeader>
                             <nav
                                 className="site-drawer-nav"
