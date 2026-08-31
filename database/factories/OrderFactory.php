@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enums\OrderStatus;
 use App\Models\Order;
 use App\Models\User;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -49,6 +50,14 @@ class OrderFactory extends Factory
     {
         return $this->state(fn (): array => [
             'status' => OrderStatus::Cancelled,
+        ]);
+    }
+
+    public function placedOn(DateTimeInterface $when): static
+    {
+        return $this->state(fn (): array => [
+            'created_at' => $when,
+            'updated_at' => $when,
         ]);
     }
 }

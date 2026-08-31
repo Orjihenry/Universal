@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react';
 import OrderController from '@/actions/App/Http/Controllers/Admin/OrderController';
 import Heading from '@/components/heading';
 import { Badge } from '@/components/ui/badge';
+import { formatMoney } from '@/lib/money';
 import { adminOrders } from '@/routes';
 
 type Order = {
@@ -57,7 +58,9 @@ export default function AdminOrdersShow({ order }: Props) {
                     </div>
                     <div className="grid gap-1">
                         <dt className="text-sm text-muted-foreground">Total</dt>
-                        <dd className="text-sm tabular-nums">${order.total}</dd>
+                        <dd className="text-sm tabular-nums">
+                            {formatMoney(order.total)}
+                        </dd>
                     </div>
                     <div className="grid gap-1">
                         <dt className="text-sm text-muted-foreground">

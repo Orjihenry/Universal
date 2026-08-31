@@ -5,6 +5,7 @@ namespace App\Actions\Admin;
 use App\Models\Business;
 use App\Models\Order;
 use App\Models\Product;
+use App\Support\Money;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,7 +42,7 @@ class GetDashboardAttention
                 fn (Order $order): array => [
                     'id' => $order->id,
                     'title' => $order->user->name,
-                    'meta' => '$'.$order->total,
+                    'meta' => Money::format($order->total),
                 ],
             ),
         ];

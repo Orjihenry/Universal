@@ -176,7 +176,7 @@ test('the dashboard lists items that need attention', function () {
             ->where('attention.pendingOrders.count', 1)
             ->where('attention.pendingOrders.items.0.id', $pendingOrder->id)
             ->where('attention.pendingOrders.items.0.title', $customer->name)
-            ->where('attention.pendingOrders.items.0.meta', '$12.00')
+            ->where('attention.pendingOrders.items.0.meta', '₦12.00')
             ->where('attention.pendingBusinesses.count', 1)
             ->where('attention.pendingBusinesses.items.0.title', $pendingBusiness->name));
 });

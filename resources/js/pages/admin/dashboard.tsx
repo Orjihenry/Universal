@@ -1,7 +1,7 @@
 import { Head, router } from '@inertiajs/react';
 import {
+    Banknote,
     Clock,
-    DollarSign,
     Package2,
     PackageCheck,
     ShoppingBag,
@@ -18,6 +18,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { formatMoney } from '@/lib/money';
 import { adminDashboard } from '@/routes';
 
 type SalesPeriod = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
@@ -77,8 +78,8 @@ export default function AdminDashboard({ stats, attention }: Props) {
         },
         {
             title: 'Today’s revenue',
-            value: `$${stats.todaysRevenue}`,
-            icon: DollarSign,
+            value: formatMoney(stats.todaysRevenue),
+            icon: Banknote,
         },
         {
             title: 'Pending orders',
@@ -219,7 +220,7 @@ export default function AdminDashboard({ stats, attention }: Props) {
                                     </ToggleGroupItem>
                                 </ToggleGroup>
                                 <p className="text-lg font-semibold tabular-nums">
-                                    ${salesTotal.toFixed(2)}
+                                    {formatMoney(salesTotal)}
                                 </p>
                             </div>
                         </CardHeader>
@@ -246,7 +247,9 @@ export default function AdminDashboard({ stats, attention }: Props) {
                                                     style={{
                                                         height: `${height}%`,
                                                     }}
-                                                    title={`$${point.revenue}`}
+                                                    title={formatMoney(
+                                                        point.revenue,
+                                                    )}
                                                 />
                                             </div>
                                             <span className="text-xs text-muted-foreground">

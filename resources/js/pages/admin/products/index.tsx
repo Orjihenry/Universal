@@ -4,6 +4,7 @@ import ProductController from '@/actions/App/Http/Controllers/Admin/ProductContr
 import Heading from '@/components/heading';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { formatMoney } from '@/lib/money';
 import { adminProducts } from '@/routes';
 
 type ProductRow = {
@@ -80,7 +81,7 @@ export default function AdminProductsIndex({
                                     <p className="text-sm text-muted-foreground">
                                         {product.categoryLabel}
                                         {product.price
-                                            ? ` · $${product.price}`
+                                            ? ` · ${formatMoney(product.price)}`
                                             : ''}
                                     </p>
                                 </div>

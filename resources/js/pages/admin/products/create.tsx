@@ -103,7 +103,7 @@ export default function AdminProductsCreate({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="price">Price</Label>
+                                    <Label htmlFor="price">Price (₦)</Label>
                                     <Input
                                         id="price"
                                         name="price"

@@ -51,4 +51,11 @@ class BusinessFactory extends Factory
             'status' => BusinessStatus::Suspended,
         ]);
     }
+
+    public function rejected(): static
+    {
+        return $this->state(fn (): array => [
+            'status' => BusinessStatus::Rejected,
+        ]);
+    }
 }

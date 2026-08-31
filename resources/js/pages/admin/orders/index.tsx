@@ -32,6 +32,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { formatMoney } from '@/lib/money';
 import { adminOrders } from '@/routes';
 
 type OrderSummary = {
@@ -176,7 +177,7 @@ export default function AdminOrdersIndex({ summary, orders }: Props) {
                                                 </div>
                                             </TableCell>
                                             <TableCell className="tabular-nums">
-                                                ${order.total}
+                                                {formatMoney(order.total)}
                                             </TableCell>
                                             <TableCell>
                                                 <Badge
