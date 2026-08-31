@@ -6,6 +6,7 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
+    SidebarClose,
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
@@ -52,8 +53,8 @@ export function AppSidebar() {
 
     return (
         <Sidebar collapsible="icon" variant="inset">
-            <SidebarHeader>
-                <SidebarMenu>
+            <SidebarHeader className="flex-row items-center justify-between gap-2">
+                <SidebarMenu className="flex-1">
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={dashboardUrl} prefetch>
@@ -62,6 +63,7 @@ export function AppSidebar() {
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
+                <SidebarClose />
             </SidebarHeader>
 
             <SidebarContent>
