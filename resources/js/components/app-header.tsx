@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { BookOpen, LayoutGrid, LifeBuoy, Menu, Search } from 'lucide-react';
 import AppearanceToggle from '@/components/appearance-toggle';
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
@@ -33,8 +33,8 @@ import {
 import { UserMenuContent } from '@/components/user-menu-content';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
-import { cn, toUrl } from '@/lib/utils';
-import { dashboard } from '@/routes';
+import { cn, isExternalUrl, toUrl } from '@/lib/utils';
+import { dashboard, faqs, help } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 type Props = {
@@ -43,13 +43,13 @@ type Props = {
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Help and Support',
+        href: help(),
+        icon: LifeBuoy,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
+        title: 'FAQs',
+        href: faqs(),
         icon: BookOpen,
     },
 ];
@@ -116,20 +116,48 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                         </div>
 
                                         <div className="flex flex-col space-y-4">
-                                            {rightNavItems.map((item) => (
-                                                <a
-                                                    key={item.title}
-                                                    href={toUrl(item.href)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center space-x-2 font-medium"
-                                                >
-                                                    {item.icon && (
-                                                        <item.icon className="h-5 w-5" />
-                                                    )}
-                                                    <span>{item.title}</span>
-                                                </a>
-                                            ))}
+                                            {rightNavItems.map((item) => {
+                                                const href = item.href ?? '#';
+                                                const className =
+                                                    'flex items-center space-x-2 font-medium';
+                                                const content = (
+                                                    <>
+                                                        {item.icon && (
+                                                            <item.icon className="h-5 w-5" />
+                                                        )}
+                                                        <span>
+                                                            {item.title}
+                                                        </span>
+                                                    </>
+                                                );
+
+                                                if (isExternalUrl(href)) {
+                                                    return (
+                                                        <a
+                                                            key={item.title}
+                                                            href={toUrl(href)}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={
+                                                                className
+                                                            }
+                                                        >
+                                                            {content}
+                                                        </a>
+                                                    );
+                                                }
+
+                                                return (
+                                                    <Link
+                                                        key={item.title}
+                                                        href={href}
+                                                        prefetch
+                                                        className={className}
+                                                    >
+                                                        {content}
+                                                    </Link>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
@@ -149,32 +177,36 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => (
-                                    <NavigationMenuItem
-                                        key={index}
-                                        className="relative flex h-full items-center"
-                                    >
-                                        <Link
-                                            href={item.href}
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                whenCurrentUrl(
-                                                    item.href,
-                                                    activeItemStyles,
-                                                ),
-                                                'h-9 cursor-pointer px-3',
-                                            )}
+                                {mainNavItems.map((item, index) => {
+                                    const href = item.href ?? '#';
+
+                                    return (
+                                        <NavigationMenuItem
+                                            key={index}
+                                            className="relative flex h-full items-center"
                                         >
-                                            {item.icon && (
-                                                <item.icon className="mr-2 h-4 w-4" />
+                                            <Link
+                                                href={href}
+                                                className={cn(
+                                                    navigationMenuTriggerStyle(),
+                                                    whenCurrentUrl(
+                                                        href,
+                                                        activeItemStyles,
+                                                    ),
+                                                    'h-9 cursor-pointer px-3',
+                                                )}
+                                            >
+                                                {item.icon && (
+                                                    <item.icon className="mr-2 h-4 w-4" />
+                                                )}
+                                                {item.title}
+                                            </Link>
+                                            {isCurrentUrl(href) && (
+                                                <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
                                             )}
-                                            {item.title}
-                                        </Link>
-                                        {isCurrentUrl(item.href) && (
-                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
-                                        )}
-                                    </NavigationMenuItem>
-                                ))}
+                                        </NavigationMenuItem>
+                                    );
+                                })}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>
@@ -190,33 +222,58 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 <Search className="size-5! opacity-80 group-hover:opacity-100" />
                             </Button>
                             <div className="ml-1 hidden gap-1 lg:flex">
-                                {rightNavItems.map((item) => (
-                                    <TooltipProvider
-                                        key={item.title}
-                                        delayDuration={0}
-                                    >
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <a
-                                                    href={toUrl(item.href)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="group inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-                                                >
-                                                    <span className="sr-only">
-                                                        {item.title}
-                                                    </span>
-                                                    {item.icon && (
-                                                        <item.icon className="size-5 opacity-80 group-hover:opacity-100" />
+                                {rightNavItems.map((item) => {
+                                    const href = item.href ?? '#';
+                                    const className =
+                                        'group inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50';
+                                    const content = (
+                                        <>
+                                            <span className="sr-only">
+                                                {item.title}
+                                            </span>
+                                            {item.icon && (
+                                                <item.icon className="size-5 opacity-80 group-hover:opacity-100" />
+                                            )}
+                                        </>
+                                    );
+
+                                    return (
+                                        <TooltipProvider
+                                            key={item.title}
+                                            delayDuration={0}
+                                        >
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    {isExternalUrl(href) ? (
+                                                        <a
+                                                            href={toUrl(href)}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={
+                                                                className
+                                                            }
+                                                        >
+                                                            {content}
+                                                        </a>
+                                                    ) : (
+                                                        <Link
+                                                            href={href}
+                                                            prefetch
+                                                            className={
+                                                                className
+                                                            }
+                                                        >
+                                                            {content}
+                                                        </Link>
                                                     )}
-                                                </a>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <p>{item.title}</p>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                ))}
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{item.title}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    );
+                                })}
                             </div>
                         </div>
                         <DropdownMenu>

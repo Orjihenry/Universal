@@ -21,6 +21,8 @@ Route::inertia('/cookie-policy', 'cookie-policy')->name('cookie-policy');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::inertia('help', 'help')->name('help');
+    Route::inertia('faqs', 'faqs')->name('faqs');
 });
 
 Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {

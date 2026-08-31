@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { BookOpen, LayoutGrid, LifeBuoy, Package2 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,7 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { dashboard, faqs, help } from '@/routes';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
@@ -25,25 +25,30 @@ export function AppSidebar() {
             href: dashboardUrl,
             icon: LayoutGrid,
         },
+        {
+            title: 'My Orders',
+            href: 'my-orders',
+            icon: Package2,
+        },
     ];
 
     const footerNavItems: NavItem[] = [
         {
-            title: 'Repository',
-            href: 'https://github.com/laravel/react-starter-kit',
-            icon: FolderGit2,
+            title: 'Help and Support',
+            href: help(),
+            icon: LifeBuoy,
         },
         {
-            title: 'Documentation',
-            href: 'https://laravel.com/docs/starter-kits#react',
+            title: 'FAQs',
+            href: faqs(),
             icon: BookOpen,
         },
     ];
 
     return (
         <Sidebar collapsible="icon" variant="inset">
-            <SidebarHeader className="flex-row items-center justify-between gap-2">
-                <SidebarMenu className="flex-1">
+            <SidebarHeader>
+                <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={dashboardUrl} prefetch>
@@ -52,11 +57,10 @@ export function AppSidebar() {
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
-                <SidebarClose />
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={mainNavItems} label="Menu" />
             </SidebarContent>
 
             <SidebarFooter>
