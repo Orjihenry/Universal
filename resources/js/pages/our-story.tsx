@@ -1,4 +1,3 @@
-import SiteLayout from '@/layouts/site-layout';
 import { Head } from '@inertiajs/react';
 
 export default function OurStory() {
@@ -6,8 +5,8 @@ export default function OurStory() {
         <>
             <Head title="Global Universal Bread Industry - Our Story" />
             <main>
-                <section className="our-story">
-                    <div className="our-story-content">
+                <section className="site-page our-story">
+                    <div className="site-page-content our-story-content">
                         <h1>Our Story</h1>
                         <p>
                             Global Universal Bread Industry is a leading manufacturer of bread and related products.

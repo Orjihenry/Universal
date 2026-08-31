@@ -76,92 +76,94 @@ export default function SiteHeader() {
                 </nav>
 
                 <div className="site-header-actions">
-                    <button
-                        type="button"
-                        className="site-header-icon"
-                        aria-label="Search"
-                    >
-                        <Search />
-                    </button>
+                    <div className="site-header-desktop-actions">
+                        <button
+                            type="button"
+                            className="site-header-icon"
+                            aria-label="Search"
+                        >
+                            <Search />
+                        </button>
 
-                    <Link
-                        href="/cart"
-                        className="site-header-icon"
-                        aria-label="Cart"
-                    >
-                        <ShoppingCart />
-                    </Link>
+                        <Link
+                            href="/cart"
+                            className="site-header-icon"
+                            aria-label="Cart"
+                        >
+                            <ShoppingCart />
+                        </Link>
 
-                    {auth.user && (
+                        {auth.user && (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger
+                                    className="site-header-icon"
+                                    aria-label="Account"
+                                >
+                                    <User />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    <DropdownMenuItem asChild>
+                                        <Link href={dashboard()} prefetch>
+                                            <LayoutGrid />
+                                            Dashboard
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href={editProfile()} prefetch>
+                                            <Settings />
+                                            Settings
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href={orders()} prefetch>
+                                            <Package />
+                                            My orders
+                                        </Link>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        )}
+
+                        <AppearanceToggle className={appearanceToggleClassName} />
+
                         <DropdownMenu>
                             <DropdownMenuTrigger
                                 className="site-header-icon"
-                                aria-label="Account"
+                                aria-label={auth.user ? 'Log out' : 'Log in'}
                             >
-                                <User />
+                                {auth.user ? <Power /> : <PowerOff />}
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuItem asChild>
-                                    <Link href={dashboard()} prefetch>
-                                        <LayoutGrid />
-                                        Dashboard
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Link href={editProfile()} prefetch>
-                                        <Settings />
-                                        Settings
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Link href={orders()} prefetch>
-                                        <Package />
-                                        My orders
-                                    </Link>
-                                </DropdownMenuItem>
+                                {auth.user ? (
+                                    <DropdownMenuItem asChild>
+                                        <Link
+                                            href={logout()}
+                                            method="post"
+                                            as="button"
+                                        >
+                                            <LogOut />
+                                            Log out
+                                        </Link>
+                                    </DropdownMenuItem>
+                                ) : (
+                                    <>
+                                        <DropdownMenuItem asChild>
+                                            <Link href={login()}>
+                                                <LogIn />
+                                                Log in
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem asChild>
+                                            <Link href={register()}>
+                                                <UserPlus />
+                                                Register
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    </>
+                                )}
                             </DropdownMenuContent>
                         </DropdownMenu>
-                    )}
-
-                    <AppearanceToggle className={appearanceToggleClassName} />
-
-                    <DropdownMenu>
-                        <DropdownMenuTrigger
-                            className="site-header-icon"
-                            aria-label={auth.user ? 'Log out' : 'Log in'}
-                        >
-                            {auth.user ? <Power /> : <PowerOff />}
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            {auth.user ? (
-                                <DropdownMenuItem asChild>
-                                    <Link
-                                        href={logout()}
-                                        method="post"
-                                        as="button"
-                                    >
-                                        <LogOut />
-                                        Log out
-                                    </Link>
-                                </DropdownMenuItem>
-                            ) : (
-                                <>
-                                    <DropdownMenuItem asChild>
-                                        <Link href={login()}>
-                                            <LogIn />
-                                            Log in
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                        <Link href={register()}>
-                                            <UserPlus />
-                                            Register
-                                        </Link>
-                                    </DropdownMenuItem>
-                                </>
-                            )}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    </div>
 
                     <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
                         <SheetTrigger
@@ -172,7 +174,7 @@ export default function SiteHeader() {
                         </SheetTrigger>
                         <SheetContent
                             side="right"
-                            className="site-drawer [&>button]:hidden"
+                            className="site-drawer w-[min(100%,22rem)] gap-0 p-0 [&>button]:hidden"
                         >
                             <SheetHeader className="flex flex-row items-center justify-between space-y-0">
                                 <div>
@@ -181,15 +183,12 @@ export default function SiteHeader() {
                                         Site navigation
                                     </SheetDescription>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                    <AppearanceToggle className={appearanceToggleClassName} />
-                                    <SheetClose
-                                        className="site-header-icon"
-                                        aria-label="Close menu"
-                                    >
-                                        <X />
-                                    </SheetClose>
-                                </div>
+                                <SheetClose
+                                    className="site-header-icon"
+                                    aria-label="Close menu"
+                                >
+                                    <X />
+                                </SheetClose>
                             </SheetHeader>
                             <nav
                                 className="site-drawer-nav"
@@ -211,6 +210,71 @@ export default function SiteHeader() {
                                     </Link>
                                 ))}
                             </nav>
+                            <div className="site-drawer-actions">
+                                <button
+                                    type="button"
+                                    className="site-drawer-action"
+                                    aria-label="Search"
+                                >
+                                    <Search />
+                                    <span>Search</span>
+                                </button>
+                                <Link
+                                    href="/cart"
+                                    className="site-drawer-action"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    <ShoppingCart />
+                                    <span>Cart</span>
+                                </Link>
+                                {auth.user ? (
+                                    <Link
+                                        href={dashboard()}
+                                        className="site-drawer-action"
+                                        prefetch
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        <User />
+                                        <span>Account</span>
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href={login()}
+                                        className="site-drawer-action"
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        <LogIn />
+                                        <span>Log in</span>
+                                    </Link>
+                                )}
+                                <div className="site-drawer-action">
+                                    <AppearanceToggle
+                                        className={appearanceToggleClassName}
+                                    />
+                                    <span>Theme</span>
+                                </div>
+                                {auth.user ? (
+                                    <Link
+                                        href={logout()}
+                                        method="post"
+                                        as="button"
+                                        className="site-drawer-action"
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        <LogOut />
+                                        <span>Log out</span>
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href={register()}
+                                        className="site-drawer-action"
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        <UserPlus />
+                                        <span>Register</span>
+                                    </Link>
+                                )}
+                            </div>
                         </SheetContent>
                     </Sheet>
                 </div>

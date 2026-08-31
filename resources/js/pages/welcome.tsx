@@ -116,7 +116,7 @@ export default function Welcome() {
     return (
         <>
             <Head title="Global Universal Bread Industry" />
-            <div className="flex min-h-screen flex-col items-center">
+            <div className="flex w-full min-h-svh flex-col overflow-x-clip">
                 <section className="hero">
                     <div className="hero-content">
                         <p className="text-rouge">

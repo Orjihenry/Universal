@@ -14,32 +14,30 @@ export default function SiteFooter() {
 
     return (
         <>
-            <footer className="footer py-12">
+            <footer className="footer">
                 <div className="footer-inner">
-                    <section className="footer-grid grid-cols-3 grid-rows-3 gap-4 mb-8">
-                        <div className="footer-brand col-span-1 row-span-1">
-                            <Link className="text-dancing-script footer-logo text-2xl font-bold" href={home()}>
-                                Global Universal
-                                <br />
-                                Bakery Industries.
-                            </Link>
-                        </div>
+                    <section className="footer-brand">
+                        <Link className="text-dancing-script footer-logo" href={home()}>
+                            Global Universal
+                            <br />
+                            Bakery Industries.
+                        </Link>
                     </section>
-                    <section className="footer-flex flex flex-col md:flex-row flex-wrap justify-between gap-4 mb-8">
+                    <section className="footer-flex">
                         <span className="addresses">
                             <span className="addresses-primary">
                                 <p>123 Main St, Anytown, USA</p>
                                 <p>info@globaluniversalbakery.com</p>
                                 <p>(123) 456-7890</p>
                             </span>
-                            <hr className="border-gray-200 my-4" />
+                            <hr className="footer-rule" />
                             <span className="addresses-secondary">
                                 <p>123 Main St, Anytown, USA</p>
                                 <p>info@globaluniversalbakery.com</p>
                                 <p>(123) 456-7890</p>
                             </span>
                         </span>
-                        <ul className="footer-nav flex flex-col gap-4">
+                        <ul className="footer-nav">
                             {navItems.map((item) => (
                                 <li key={item.label}>
                                     <Link href={item.href} className="footer-link">
@@ -49,7 +47,7 @@ export default function SiteFooter() {
                             ))}
                         </ul>
                         {auth.user ? (
-                            <ul className="footer-auth flex flex-col gap-4">
+                            <ul className="footer-auth">
                                 <li>
                                     <Link href={shop()}>Shop</Link>
                                 </li>
@@ -64,7 +62,7 @@ export default function SiteFooter() {
                                 </li>
                             </ul>
                         ) : (
-                            <ul className="footer-auth flex flex-col gap-4">
+                            <ul className="footer-auth">
                                 <li>
                                     <Link href={shop()}>Shop</Link>
                                 </li>
@@ -73,7 +71,7 @@ export default function SiteFooter() {
                                 </li>
                             </ul>
                         )}
-                        <ul className="hours flex flex-col gap-4">
+                        <ul className="hours">
                             <li>
                                 <p>Office Hours</p>
                             </li>
@@ -94,7 +92,7 @@ export default function SiteFooter() {
                         <span className="footer-legal">
                             <p>&copy; {new Date().getFullYear()} Global Universal Bakery Industries. All rights reserved.</p>
                         </span>
-                        <span className="footer-legal-links flex flex-row gap-4">
+                        <span className="footer-legal-links">
                             <Link href={privacyPolicy()}>Privacy Policy</Link>
                             <Link href={termsOfService()}>Terms of Service</Link>
                             <Link href={cookiePolicy()}>Cookie Policy</Link>
