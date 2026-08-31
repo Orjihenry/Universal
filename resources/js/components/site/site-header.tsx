@@ -1,5 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import {
+    LayoutGrid,
     LogIn,
     LogOut,
     Menu,
@@ -31,7 +32,7 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { useCurrentUrl } from '@/hooks/use-current-url';
-import { breadAndSpecialties, contact, home, login, logout, ourStory, register } from '@/routes';
+import { breadAndSpecialties, contact, dashboard, home, login, logout, orders, ourStory, register } from '@/routes';
 import { edit as editProfile } from '@/routes/profile';
 
 const navItems = [
@@ -101,13 +102,19 @@ export default function SiteHeader() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                                 <DropdownMenuItem asChild>
-                                    <Link href={editProfile()}>
-                                        <Settings />
-                                        Account
+                                    <Link href={dashboard()} prefetch>
+                                        <LayoutGrid />
+                                        Dashboard
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link href="/orders">
+                                    <Link href={editProfile()} prefetch>
+                                        <Settings />
+                                        Settings
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                    <Link href={orders()} prefetch>
                                         <Package />
                                         My orders
                                     </Link>

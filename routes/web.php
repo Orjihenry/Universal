@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BusinessController;
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
@@ -21,6 +22,8 @@ Route::inertia('/cookie-policy', 'cookie-policy')->name('cookie-policy');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::inertia('help', 'help')->name('help');
     Route::inertia('faqs', 'faqs')->name('faqs');
 });
@@ -42,9 +45,9 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
         ->name('admin-businesses.store');
     Route::get('admin/businesses/{business}', [BusinessController::class, 'show'])
         ->name('admin-businesses.show');
-    Route::get('admin/orders', [OrderController::class, 'index'])
+    Route::get('admin/orders', [AdminOrderController::class, 'index'])
         ->name('admin-orders');
-    Route::get('admin/orders/{order}', [OrderController::class, 'show'])
+    Route::get('admin/orders/{order}', [AdminOrderController::class, 'show'])
         ->name('admin-orders.show');
     Route::get('admin/users/{audience}', [UserController::class, 'index'])
         ->whereIn('audience', ['customers', 'staff', 'admins'])

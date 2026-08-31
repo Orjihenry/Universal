@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, LayoutGrid, LifeBuoy, Package2 } from 'lucide-react';
+import { BookOpen, House, LayoutGrid, LifeBuoy, Package2 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,7 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, faqs, help } from '@/routes';
+import { dashboard, faqs, help, home, orders } from '@/routes';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
@@ -27,8 +27,13 @@ export function AppSidebar() {
         },
         {
             title: 'My Orders',
-            href: 'my-orders',
+            href: orders(),
             icon: Package2,
+        },
+        {
+            title: 'Back to site',
+            href: home(),
+            icon: House,
         },
     ];
 

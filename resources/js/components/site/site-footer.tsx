@@ -1,6 +1,6 @@
 import { Link, usePage } from "@inertiajs/react";
 import { edit as editProfile } from '@/routes/profile';
-import { breadAndSpecialties, contact, cookiePolicy, featured, home, ourStory, privacyPolicy, shop, termsOfService } from "@/routes";
+import { breadAndSpecialties, contact, cookiePolicy, featured, home, orders, ourStory, privacyPolicy, shop, termsOfService } from "@/routes";
 
 const navItems = [
     { href: home(), label: 'Home', isHome: true },
@@ -60,7 +60,7 @@ export default function SiteFooter() {
                                     <Link href={editProfile()}>Account</Link>
                                 </li>
                                 <li>
-                                    <Link href="/orders">My Orders</Link>
+                                    <Link href={orders()}>My Orders</Link>
                                 </li>
                             </ul>
                         ) : (
