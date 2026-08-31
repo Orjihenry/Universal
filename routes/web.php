@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BusinessController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,10 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
         ->name('admin-businesses.store');
     Route::get('admin/businesses/{business}', [BusinessController::class, 'show'])
         ->name('admin-businesses.show');
+    Route::get('admin/orders', [OrderController::class, 'index'])
+        ->name('admin-orders');
+    Route::get('admin/orders/{order}', [OrderController::class, 'show'])
+        ->name('admin-orders.show');
 });
 
 require __DIR__.'/settings.php';

@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Building2, Cake, CakeSlice, FileText, FolderGit2, LayoutGrid, Mail, Package2, UserCog, UserIcon, Users } from 'lucide-react';
+import { BookOpen, Building2, Cake, CakeSlice, FileText, FolderGit2, LayoutGrid, Mail, Package2, ShoppingBag, UserCog, UserIcon, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
@@ -15,7 +15,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { adminBusinesses, adminDashboard, adminProducts } from '@/routes';
+import { adminBusinesses, adminDashboard, adminOrders, adminProducts } from '@/routes';
 import type { NavItem } from '@/types';
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -79,8 +79,8 @@ export function AdminSidebar() {
         },
         {
             title: 'Orders',
-            href: '#',
-            icon: Package2,
+            href: adminOrders(),
+            icon: ShoppingBag,
         },
         {
             title: 'Pages',

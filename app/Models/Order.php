@@ -87,6 +87,16 @@ class Order extends Model
     }
 
     /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function completed(Builder $query): Builder
+    {
+        return $query->where('status', OrderStatus::Completed);
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
